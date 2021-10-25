@@ -1,28 +1,10 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        String[] palo = {"picas", "corazones", "diamantes", "tréboles"};
-        String[] valor = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        Deck deck = new Deck();
-        deck.setCard(new ArrayList<Card>());
-        for (int i = 0; i < palo.length; i++) {
-            for (int j = 0; j < valor.length; j++) {
-                Card card = new Card(palo[i], getColor(palo[i]), valor[j]);
-                deck.getCard().add(card);
-            }
-
-        }
-        System.out.println("El tamaño del deck es: " + deck.getCard().size());
-        System.out.println("Mezclar Deck\n" + deck.mezclar());
-        System.out.println("Se seleccionó la carta de encima");
-        deck.head();
-        System.out.println("Se seleccionó una carta al azar");
-        deck.pick();
-        System.out.println("Se seleccionaron cinco cartas");
-        deck.hand();
+        showMenu();
     }
 
     public static String getColor(String palo) {
@@ -34,5 +16,49 @@ public class Main {
         }
 
         return null;
+    }
+
+    public static void showMenu(){
+        String[] palo = {"picas", "corazones", "diamantes", "tréboles"};
+        String[] valor = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        Deck deck = new Deck();
+        deck.setCard(new ArrayList<Card>());
+        for (int i = 0; i < palo.length; i++) {
+            for (int j = 0; j < valor.length; j++) {
+                Card card = new Card(palo[i], getColor(palo[i]), valor[j]);
+                deck.getCard().add(card);
+            }
+
+        }
+        byte opcion = 0;
+        do{
+            opcion=Byte.parseByte(JOptionPane.showInputDialog("Bienvenido a Poker!\n"
+            +"Selecciona una opción\n"
+            +"1. Mezclar Deck\n"
+            +"2. Sacar una carta\n"
+            +"3. Carta al azar\n"
+            +"4. Generar una mano de 5 cartas\n"
+            +"0. Salir"));
+            switch (opcion){
+                case 1:
+                    System.out.println("Mezclar Deck\n" + deck.mezclar());
+                    break;
+                case 2:
+                    deck.head();
+                    break;
+                case 3:
+                    deck.pick();
+                    break;
+                case 4:
+                    deck.hand();
+                    break;
+                case 0:
+                    opcion = 0;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción invalida");
+                    break;
+            }
+        }while (opcion != 0);
     }
 }
