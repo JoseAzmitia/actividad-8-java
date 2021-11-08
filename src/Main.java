@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Main {
@@ -32,13 +33,18 @@ public class Main {
         }
         byte opcion = 0;
         do{
-            opcion=Byte.parseByte(JOptionPane.showInputDialog("Bienvenido a Poker!\n"
-            +"Selecciona una opción\n"
-            +"1. Mezclar Deck\n"
-            +"2. Sacar una carta\n"
-            +"3. Carta al azar\n"
-            +"4. Generar una mano de 5 cartas\n"
-            +"0. Salir"));
+            try {
+                opcion = Byte.parseByte(JOptionPane.showInputDialog("Bienvenido a Poker!\n"
+                        + "Selecciona una opción\n"
+                        + "1. Mezclar Deck\n"
+                        + "2. Sacar una carta\n"
+                        + "3. Carta al azar\n"
+                        + "4. Generar una mano de 5 cartas\n"
+                        + "0. Salir"));
+            }catch (Throwable e){
+                JOptionPane.showMessageDialog(null, "Opción inválida");
+                showMenu();
+            }
             switch (opcion){
                 case 1:
                     System.out.println("Mezclar Deck\n" + deck.mezclar());
@@ -56,7 +62,7 @@ public class Main {
                     opcion = 0;
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Opción invalida");
+                    JOptionPane.showMessageDialog(null, "Opción inválida");
                     break;
             }
         }while (opcion != 0);

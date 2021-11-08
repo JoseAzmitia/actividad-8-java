@@ -29,25 +29,50 @@ public class Deck {
     }
 
     public void  head(){
-        System.out.println(card.get(0));
-        card.remove(0);
-        System.out.println("Quedan " + card.size()+ " cartas en el deck");
+        if (card.size()< 1){
+            System.out.println("Se han agotado las cartas");
+        }else {
+            try {
+                System.out.println(card.get(0));
+                card.remove(0);
+                System.out.println("Quedan " + card.size() + " cartas en el deck");
+            } catch (Throwable e) {
+                System.out.println("Ha ocurrido un error");
+            }
+        }
     }
 
     public void pick(){
-        Random random = new Random();
-        System.out.println(card.get(random.nextInt(card.size())));
-        card.remove(random.nextInt(card.size()));
-        System.out.println("Quedan " + card.size() + " cartas en el deck");
+        if (card.size()< 1){
+            System.out.println("Se han agotado las cartas");
+        }else {
+            try {
+                Random random = new Random();
+                System.out.println(card.get(random.nextInt(card.size())));
+                card.remove(random.nextInt(card.size()));
+                System.out.println("Quedan " + card.size() + " cartas en el deck");
+            } catch (Throwable e) {
+                System.out.println("Ha ocurrido un error");
+            }
+        }
     }
 
-    public void hand(){
-        for(int i=0; i<5; i++){
-            System.out.println(card.get(i));
+    public void hand() {
+        if (card.size() < 1) {
+            System.out.println("Se han agotado las cartas");
+        } else if (card.size() >= 5){
+            try {
+                for (int i = 0; i < 5; i++) {
+                    System.out.println(card.get(i));
+                }
+                for (int i = 0; i < 5; i++) {
+                    card.remove(i);
+                }
+                System.out.println("Quedan " + card.size() + " cartas en el deck");
+            } catch (Throwable e) {
+                System.out.println("Ya no hay suficientes cartas, intenta otra opción");
+                System.out.println("Quedan " + card.size() + " cartas en el deck");
+            }
         }
-        for(int i=0; i<5; i++){
-            card.remove(i);
-        }
-        System.out.println("Quedan " + card.size()+ " cartas en el deck");
     }
 }
